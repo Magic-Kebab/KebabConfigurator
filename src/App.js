@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import MultipleSelector from './components/multipleSelector';
 
 function App() {
   return (
-    <div className="App">
-      
+    <div className='App'>
+      <MultipleSelector question='Quelles sauces ?' datatype='sauces'/>
     </div>
   );
 }
