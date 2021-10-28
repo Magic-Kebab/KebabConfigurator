@@ -1,16 +1,10 @@
 import "./css/card.css"
-//import fakeData from '../data.json'
 
 function Card(props) {
-    const { name, image } = props
-    //console.log(fakeData.base[0].name)
-    //test récupération de données JSON:
-    
-    const selectItem = (name) =>{
-        console.log(name)
-    }
+    const { name, image, data, isSelected } = props
+
     return (
-        <div key={name} onClick={() => selectItem(name)} className='card'>
+        <div key={name} onClick={() => isSelected(data)} className='card'>
         <img src={image} alt="item" />
         <p>{name}</p>
         </div>
