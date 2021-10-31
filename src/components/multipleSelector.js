@@ -1,4 +1,3 @@
-//import { useState } from 'react'
 import fakeData from '../data.json'
 import Card from './card'
 
@@ -8,39 +7,56 @@ function MultipleSelector(props){
     const logo = fakeData.logos[0].image
     const data = fakeData[datatype]
     let selectedItems = []
+
     const addToSelectedItems = (data) => {
         let exit = false;
+        /* On parcourt la liste d'éléments sélectionnés en cherchant si le nom de l'élément sélectionné 
+        figure déjà dans la liste des éléments sélectionnés. S'il est trouvé, on le retire de cette liste. */
         selectedItems.map(item => {
-            console.log('in map')
-            if(item.name===data.name){console.log('equals')
+            if(item.name===data.name){
                 selectedItems=selectedItems.filter(item => item.name!==data.name);
                 exit = true
-                return '';
+                return 'lint happy!';
             }
-            return '';
+            return 'lint happy!';
         })
-        if(exit){return;}
+        if(exit){return false;}
+
+        /* Dans le cas où le nom du nouvel élément n'est pas déjà présent dans la liste, on vérifie si
+        une limite de sélection n'est pas définie.*/
         if(limit){
+            /* Dans le cas où une limite est définie, si la limite passée en props de ce composant n'est pas atteinte
+            on peut donc ajouter le nouvel élément à la liste d'éléments sélectionnés. */
             if(selectedItems.length+1<=limit){
                 selectedItems.push(data);
-                console.log(selectedItems)
+                return true;
             }
-            return;
+            return false;
         }else{
+            /* Sinon si pas de limite, on ajoute l'élément à la liste des éléments sélectionnés directement. */
             selectedItems.push(data);
         }
-        console.log('Selected:',selectedItems)
+        return true;
         
     }
-    const isSelected = (data) => {
-        addToSelectedItems(data)
+    const isSelected = (data, setClassName) => {
+        const added = addToSelectedItems(data)
+        return setClassName(`${added?'selected':'card'}`) 
     }
-    const dataList = data.map(data => (<Card name={data.name} image={data.image} data={data} isSelected={isSelected}/>))
+
+    let dataList = data.map(data => (
+        <Card 
+            name={data.name} 
+            image={data.image} 
+            data={data} 
+            isSelected={isSelected}
+            />
+        ))
     return (
         <div>
             <img src={logo} alt='Magic Kebab'/>
             <h2>{question}</h2>
-            <div>{dataList}</div>
+            <div as={dataList}>{dataList}</div>
             <button onClick={() => console.log('clic')}>Continuer</button>
         </div>
     )
