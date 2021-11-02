@@ -9,9 +9,9 @@ Pour l'historique des commits précédents, il faut se référer à la branche m
 
 Comment utiliser ce projet?
 Pour lancer ce projet, il faut suivre les étapes suivantes:
-a/ Récupération du projet en local:
+- Récupération du projet en local:
 `git clone https://github.com/Magic-Kebab/KebabConfigurator`
-b/ Installation des dépendances:
+- Installation des dépendances:
 `npm i`
-c/ Lancement du projet:
+- Lancement du projet:
 `npm run start`
